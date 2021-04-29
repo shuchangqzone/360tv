@@ -1,0 +1,117 @@
+<html>
+<head>
+	<!-- [桃花源] 版本：v2.1 2021.04.29 jscdn -->
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="referrer" content="never">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+	<meta http-equiv="Cache-Control" content="no-transform" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="applicable-device" content="pc,mobile">
+	<meta name="robots" content="noarchive">
+	<link href="/favicon.ico" type="image/x-icon" rel="icon" />
+	<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+	<!--[if lt IE 11]>
+	<style type="text/css">body,html,.a1{background-color:#000;padding: 0;margin: 0;width:100%;height:100%;top:-15px;}</style>
+	<script type="text/javascript" src="ckplayer/ckplayer.js"></script>
+	<![endif]-->
+	<style type="text/css">body,html,.dplayer{padding:0;margin:0;width:100%;height:100%;background-color:#000;}div{color:#aaa;}a{text-decoration:none;}</style>
+	<!-- 2.0附加 -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer-main/js/DPlayer.min.css" />
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer-main/js/hls.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer-main/js/DPlayer.min.js"></script>
+	<!-- 1.0附加 -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer/flv.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer/dash.all.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/shuchangqzone/jscdn@1.0/dplayer/webtorrent.min.js"></script>
+	<!--[if lt IE 11]>
+	<script type="text/javascript">
+	alert("\u60a8\u6b63\u5728\u4f7f\u7528\u4e0d\u5b89\u5168\u7684\u0020\u0049\u006e\u0074\u0065\u0072\u006e\u0065\u0074\u0020\u0045\u0078\u0070\u006c\u006f\u0072\u0065\u0072\u0020\u6d4f\u89c8\u5668\uff0c\u60f3\u83b7\u5f97\u6700\u4f73\u7684\u6d4f\u89c8\u4f53\u9a8c\uff0c\u8bf7\u4f7f\u7528\u0046\u0069\u0072\u0065\u0066\u006f\u0078\u3001\u0043\u0068\u0072\u006f\u006d\u0065\u7b49\u73b0\u4ee3\u7684\u6d4f\u89c8\u5668\uff0c\u63a8\u8350\u5fae\u8f6f\u65b0\u0045\u0064\u0067\u0065\u6d4f\u89c8\u5668\u000d\u000a\u000d\u000a\u517c\u5bb9\u6a21\u5f0f\u0020\u6613\u4ea7\u751f\u64ad\u653e\u95ee\u9898\uff0c\u8bf7\u5c06\u6d4f\u89c8\u5668\u8bbe\u7f6e\u4e3a\u0020\u6781\u901f\u6a21\u5f0f\uff01");
+	</script>
+	<![endif]-->
+</head>
+<body marginwidth="0" marginheight="0" ondragstart="window.event.returnValue=false" oncontextmenu="window.event.returnValue=false" onselectstart="event.returnValue=false">
+<!--[if lt IE 11]>
+<div class="a1"></div>
+<script type="text/javascript">
+var qu = this.location.search;
+var url = qu.split("?url=");
+var vid = url[1];
+</script>
+<script type="text/javascript" src="ckplayer/cktime.js"></script>
+<div style="display:none;">
+<![endif]-->
+<div id="player" class="dplayer"></div>
+<script type="text/javascript">
+var qu = this.location.search;
+var url = qu.split("?url=");
+    var webdata = {
+		set:function(key,val){
+			window.sessionStorage.setItem(key,val);
+		},
+		get:function(key){
+			return window.sessionStorage.getItem(key);
+		},
+		del:function(key){
+			window.sessionStorage.removeItem(key);
+		},
+		clear:function(key){
+			window.sessionStorage.clear();
+		}
+	};
+    var type='normal';
+    var live=false;
+    if(url[1].indexOf('.m3u8')>-1){
+        type='hls';
+        live=true;
+    }
+    else if(url[1].indexOf('magnet:')>-1){
+        type='webtorrent';
+    }
+    else if(url[1].indexOf('.flv')>-1){
+        type='flv';
+    }
+    else if(url[1].indexOf('.mpd')>-1){
+        type='dash';
+    }
+
+function GetQueryString(name)
+	{
+		 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		 var r = window.location.search.substr(1).match(reg);
+		 if(r!=null)return  unescape(r[2]); return null;
+	}
+  var ismobile = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
+  if(ismobile){
+	document.getElementById('player').innerHTML = '<video src="'+url[1]+'" controls="controls" autoplay="autoplay" width="100%" height="100%" x-webkit-airplay="allow" poster="/jiexi/load.gif"></video>';
+      }else {
+		var dplayer = new DPlayer({
+			element: document.getElementById("player"),
+			autoplay: true,
+			video: {
+				url: url[1], 
+				type:'auto',
+			       }
+		});
+	dplayer.seek(webdata.get('pay'+url[1]));
+	setInterval(function(){
+		webdata.set('pay'+url[1],dplayer.video.currentTime);
+	},1000);
+       }
+if ((navigator.userAgent.indexOf('MSIE') >= 0)
+			|| (navigator.userAgent.indexOf('Trident') >= 0)) {
+		alert("\u517c\u5bb9\u6a21\u5f0f\u0020\u6613\u4ea7\u751f\u64ad\u653e\u95ee\u9898\uff0c\u8bf7\u5c06\u6d4f\u89c8\u5668\u8bbe\u7f6e\u4e3a\u0020\u6781\u901f\u6a21\u5f0f\uff01");
+     }
+       try{
+		//document.getElementById('playerCnt').style.height = parent.MacPlayer.Height + 'px';
+	}
+	catch(e){}
+</script>
+<!--[if lt IE 11]>
+</div>
+<![endif]-->
+<span style="display:none;">
+</span>
+</body>
+</html>
