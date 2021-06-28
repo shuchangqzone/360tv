@@ -1,0 +1,1 @@
+<script>var Sitepurl='{maccms:url}';{maccms:play}{if-A:"[play:from]"= "[vod:playfrom]"}var Sitepcount='[play:urlcount]';var Sitepvodnum='[vod:playnum]';{endif-A}{/maccms:play}</script>
