@@ -1,0 +1,3 @@
+# baidu & google & 360 & bing & sogou & map
+User-agent: *
+Disallow: /
